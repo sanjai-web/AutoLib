@@ -1,0 +1,15 @@
+const fetchLiveLocation = async (busNumber) => {
+    try {
+      const dbRef = ref(database);
+      const snapshot = await get(child(dbRef, `live_location_data/${busNumber}`));
+      if (snapshot.exists()) {
+        return snapshot.val(); // Should contain live location data (latitude and longitude)
+      } else {
+        console.error('No live location data available');
+        return null;
+      }
+    } catch (error) {
+      console.error('There was an error fetching the live location data!', error);
+      return null;
+    }
+  };

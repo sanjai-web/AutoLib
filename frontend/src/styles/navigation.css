@@ -1,0 +1,58 @@
+*{
+    
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        padding: 0px;
+        margin: 0px;
+      
+      
+}
+
+.Topnav {
+    padding: 15px 25px;
+    min-width: 200px;
+    max-width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 27px;
+   
+    border-bottom: 1px solid #5059783e;
+    width: 97%;
+    display: flex;
+    z-index: 1000;
+    background-color: #fff; /* Adjust as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+
+  .homei {
+    font-size: 20px;
+    position: relative;
+    left: 2090%;
+    top:1px;
+    text-decoration: none;
+    color: #000000cd;
+  }
+  .homei:hover {
+    color: black;
+  }
+  
+  .message {
+    font-size: 20px;
+    position: relative;
+    left: 2090%;
+    top:1px;
+    text-decoration: none;
+    color: #000000cd;
+  }
+  .message:hover {
+    color: black;
+  }
+
+  .navmain{
+    display: flex;
+  }
+
+  .link1{
+    text-decoration: none;
+  }

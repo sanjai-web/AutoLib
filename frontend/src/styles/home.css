@@ -1,0 +1,91 @@
+.home-page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+
+
+.home-page h1 {
+  text-align: center;
+  position: absolute;
+  top: 15%;
+  left: 45%;
+  margin-bottom: 20px;
+}
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+
+
+.bus-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-weight: 470;
+ 
+}
+
+.bus-table th, .bus-table td {
+  border: 1.5px solid #cacaca;
+  padding: 8px;
+  text-align: center;
+}
+
+.bus-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+
+.clickable-bus-number {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.search-bus {
+  outline: none;
+  border: 1.5px solid #767676;
+  margin: 8px 0;
+  min-width: 10%;
+  margin-left: 27%;
+  margin-top: 20px;
+  color: #535353;
+  background-color: #fff;
+  padding: 0.7rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  font-size: medium;
+  line-height: 1.25rem;
+  width: 350px;
+  border-radius: 5rem;
+  position: absolute;
+  left: 12%;
+  top: 25%;
+}
+
+
+.locate-button {
+  cursor: pointer;
+  background-color: #04AA6D; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 500;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  border-radius: 4px;
+}
+
+.locate-button:hover {
+  background-color:#04AA6D;
+  color: rgb(255, 255, 255);
+  border: 4px solid #4caf4fe5;
+}
+
