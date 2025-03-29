@@ -9,7 +9,7 @@ function navigation() {
     <div className='navName' >company name</div>
     
    <span className='navmain'>
-          <NavLink  to="/home" className="link1">
+          <NavLink  to="/" className="link1">
             <p className="homei" > Home </p>
           </NavLink>
      

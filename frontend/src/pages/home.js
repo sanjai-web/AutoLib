@@ -59,46 +59,38 @@ function Home() {
     }
   };
 
+  // Function to handle the click event for the 'Locate' button
+  const handleBusClick = async (busNumber, fromPlace, toPlace, boardingPoints) => {
+    const fromPlaceEncoded = encodeURIComponent(fromPlace);
+    const toPlaceEncoded = encodeURIComponent(toPlace);
+    const waypointsEncoded = boardingPoints
+      .map(point => encodeURIComponent(point.placeName))
+      .join('|');
 
+    // Fetch the live location data again before opening Google Maps
+    const liveLocation = await fetchLiveLocation(busNumber);
+    if (liveLocation) {
+      const { latitude, longitude } = liveLocation;
+      const liveLocationWaypoint = `${latitude},${longitude}`;
 
+      // Add live location as the last waypoint
+      const waypointsWithLiveLocation = waypointsEncoded 
+        ? `${waypointsEncoded}|${liveLocationWaypoint}` 
+        : liveLocationWaypoint;
 
+      // Create a marker for the live location with a specific icon
+      const customIconUrl = 'https://maps.google.com/mapfiles/kml/paddle/red-circle.png'; // Example of a custom icon
+      const liveLocationMarker = `&markers=icon:${encodeURIComponent(customIconUrl)}|${latitude},${longitude}`;
 
-// Function to handle the click event for the 'Locate' button
-const handleBusClick = async (busNumber, fromPlace, toPlace, boardingPoints) => {
-  const fromPlaceEncoded = encodeURIComponent(fromPlace);
-  const toPlaceEncoded = encodeURIComponent(toPlace);
-  const waypointsEncoded = boardingPoints
-    .map(point => encodeURIComponent(point.placeName))
-    .join('|');
+      // Construct the Google Maps URL
+      const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${fromPlaceEncoded}&destination=${toPlaceEncoded}&waypoints=${waypointsWithLiveLocation}${liveLocationMarker}`;
 
-  // Fetch the live location data again before opening Google Maps
-  const liveLocation = await fetchLiveLocation(busNumber);
-  if (liveLocation) {
-    const { latitude, longitude } = liveLocation;
-    const liveLocationWaypoint = `${latitude},${longitude}`;
-
-    // Add live location as the last waypoint
-    const waypointsWithLiveLocation = waypointsEncoded 
-      ? `${waypointsEncoded}|${liveLocationWaypoint}` 
-      : liveLocationWaypoint;
-
-    // Create a marker for the live location with a specific icon
-    const customIconUrl = 'https://maps.google.com/mapfiles/kml/paddle/red-circle.png'; // Example of a custom icon
-    const liveLocationMarker = `&markers=icon:${encodeURIComponent(customIconUrl)}|${latitude},${longitude}`;
-
-    // Construct the Google Maps URL
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${fromPlaceEncoded}&destination=${toPlaceEncoded}&waypoints=${waypointsWithLiveLocation}${liveLocationMarker}`;
-
-    // Open the Google Maps URL in a new tab
-    window.open(googleMapsUrl, '_blank');
-  } else {
-    alert('Live location not available for this bus.');
-  }
-};
-
-
-
-
+      // Open the Google Maps URL in a new tab
+      window.open(googleMapsUrl, '_blank');
+    } else {
+      alert('Live location not available for this bus.');
+    }
+  };
 
   // Fetch bus data on component mount
   useEffect(() => {
@@ -106,9 +98,10 @@ const handleBusClick = async (busNumber, fromPlace, toPlace, boardingPoints) => 
   }, []);
 
   // Filter buses based on the search term
-  const filteredBuses = buses.filter((bus) =>
-    bus.busNumber.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBuses = buses.filter((bus) => 
+    bus.busNumber && bus.busNumber.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
 
   return (
     <div className="home-page">
